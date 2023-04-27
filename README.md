@@ -13,5 +13,15 @@ The main services of the application are:
 - password grouping by tags
 - cryptography
   
+## Technologies
+- C# .NET 6 (8 future releases) (services)
+- MySQL/MariaDB (database)
+- Angular LTS (web interface, desktop application)
+- Kotlin (mobile app)
+- JavasScript (browser extension)
+  
+
+## Schema 
+https://s.icepanel.io/bpeUw2ZAtI1XCG/sx00
 
 
