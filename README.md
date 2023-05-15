@@ -64,8 +64,8 @@ Questo dominio gestisce la possibilità per gli utenti di rinnovare le proprie p
 Questo dominio tiene traccia della cronologia delle password utilizzate dagli utenti, consentendo la visualizzazione delle password precedenti e il monitoraggio dei cambiamenti.
 
 ## Mermaid
-```mermaid
-graph TD
+``` mermaid
+graph LR
 
 subgraph KeyKeep
   subgraph Frontend
@@ -81,4 +81,59 @@ subgraph KeyKeep
     PasswordManagementService
     PasswordSharingService
     PasswordGenerationService
+    CryptographyService
+    SmtpPopDomainService
+    TwoFactorAuthService
+    PasswordRenewalService
+    PasswordHistoryService
+  end
+end
+
+WebInterface --> UserManagementService
+WebInterface --> GroupManagementService
+WebInterface --> TeamManagementService
+WebInterface --> PasswordManagementService
+WebInterface --> PasswordSharingService
+WebInterface --> PasswordGenerationService
+WebInterface --> CryptographyService
+WebInterface --> SmtpPopDomainService
+WebInterface --> TwoFactorAuthService
+WebInterface --> PasswordRenewalService
+WebInterface --> PasswordHistoryService
+
+DesktopApplication --> UserManagementService
+DesktopApplication --> GroupManagementService
+DesktopApplication --> TeamManagementService
+DesktopApplication --> PasswordManagementService
+DesktopApplication --> PasswordSharingService
+DesktopApplication --> PasswordGenerationService
+DesktopApplication --> CryptographyService
+DesktopApplication --> SmtpPopDomainService
+DesktopApplication --> TwoFactorAuthService
+DesktopApplication --> PasswordRenewalService
+DesktopApplication --> PasswordHistoryService
+
+BrowserExtension --> UserManagementService
+BrowserExtension --> GroupManagementService
+BrowserExtension --> TeamManagementService
+BrowserExtension --> PasswordManagementService
+BrowserExtension --> PasswordSharingService
+BrowserExtension --> PasswordGenerationService
+BrowserExtension --> CryptographyService
+BrowserExtension --> SmtpPopDomainService
+BrowserExtension --> TwoFactorAuthService
+BrowserExtension --> PasswordRenewalService
+BrowserExtension --> PasswordHistoryService
+
+MobileApp --> UserManagementService
+MobileApp --> GroupManagementService
+MobileApp --> TeamManagementService
+MobileApp --> PasswordManagementService
+MobileApp --> PasswordSharingService
+MobileApp --> PasswordGenerationService
+MobileApp --> CryptographyService
+MobileApp --> SmtpPopDomainService
+MobileApp --> TwoFactorAuthService
+MobileApp --> PasswordRenewalService
+MobileApp --> PasswordHistoryService
 ```
