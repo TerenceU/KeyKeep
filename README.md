@@ -89,34 +89,36 @@ subgraph KeyKeep
       PasswordRenewalService
       PasswordHistoryService
     end
-    LoadBalancer --> UserManagementService
-    LoadBalancer --> GroupManagementService
-    LoadBalancer --> TeamManagementService
-    LoadBalancer --> PasswordManagementService
-    LoadBalancer --> PasswordSharingService
-    LoadBalancer --> PasswordGenerationService
-    LoadBalancer --> CryptographyService
-    LoadBalancer --> SmtpPopDomainService
-    LoadBalancer --> TwoFactorAuthService
-    LoadBalancer --> PasswordRenewalService
-    LoadBalancer --> PasswordHistoryService
-    APGateway --> ServiceCluster
-    RabbitMQ
+    LoadBalancer --> APGateway
+    APGateway --> UserManagementService
+    APGateway --> GroupManagementService
+    APGateway --> TeamManagementService
+    APGateway --> PasswordManagementService
+    APGateway --> PasswordSharingService
+    APGateway --> PasswordGenerationService
+    APGateway --> CryptographyService
+    APGateway --> SmtpPopDomainService
+    APGateway --> TwoFactorAuthService
+    APGateway --> PasswordRenewalService
+    APGateway --> PasswordHistoryService
+    APGateway --> RabbitMQ
   end
 end
 
-WebInterface --> APGateway
-DesktopApplication --> APGateway
-BrowserExtension --> APGateway
-MobileApp --> APGateway
+WebInterface --> LoadBalancer
+DesktopApplication --> LoadBalancer
+BrowserExtension --> LoadBalancer
+MobileApp --> LoadBalancer
 
-LoadBalancer --> APGateway
-
+RabbitMQ --> UserManagementService
+RabbitMQ --> GroupManagementService
+RabbitMQ --> TeamManagementService
 RabbitMQ --> PasswordManagementService
 RabbitMQ --> PasswordSharingService
 RabbitMQ --> PasswordGenerationService
 RabbitMQ --> CryptographyService
 RabbitMQ --> SmtpPopDomainService
+RabbitMQ --> TwoFactorAuthService
 RabbitMQ --> PasswordRenewalService
 RabbitMQ --> PasswordHistoryService
 
