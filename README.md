@@ -75,8 +75,8 @@ subgraph KeyKeep
     MobileApp
   end
   subgraph Backend
-    subgraph LoadBalancer
-      LoadBalancer
+    LoadBalancer
+    subgraph ServiceCluster
       UserManagementService
       GroupManagementService
       TeamManagementService
@@ -89,7 +89,18 @@ subgraph KeyKeep
       PasswordRenewalService
       PasswordHistoryService
     end
-    LoadBalancer --> APGateway
+    LoadBalancer --> UserManagementService
+    LoadBalancer --> GroupManagementService
+    LoadBalancer --> TeamManagementService
+    LoadBalancer --> PasswordManagementService
+    LoadBalancer --> PasswordSharingService
+    LoadBalancer --> PasswordGenerationService
+    LoadBalancer --> CryptographyService
+    LoadBalancer --> SmtpPopDomainService
+    LoadBalancer --> TwoFactorAuthService
+    LoadBalancer --> PasswordRenewalService
+    LoadBalancer --> PasswordHistoryService
+    APGateway --> ServiceCluster
     RabbitMQ
   end
 end
@@ -99,20 +110,7 @@ DesktopApplication --> APGateway
 BrowserExtension --> APGateway
 MobileApp --> APGateway
 
-APGateway --> LoadBalancer
-LoadBalancer --> UserManagementService
-LoadBalancer --> GroupManagementService
-LoadBalancer --> TeamManagementService
-LoadBalancer --> PasswordManagementService
-LoadBalancer --> PasswordSharingService
-LoadBalancer --> PasswordGenerationService
-LoadBalancer --> CryptographyService
-LoadBalancer --> SmtpPopDomainService
-LoadBalancer --> TwoFactorAuthService
-LoadBalancer --> PasswordRenewalService
-LoadBalancer --> PasswordHistoryService
-
-LoadBalancer --> RabbitMQ
+LoadBalancer --> APGateway
 
 RabbitMQ --> PasswordManagementService
 RabbitMQ --> PasswordSharingService
