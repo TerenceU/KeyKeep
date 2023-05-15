@@ -75,65 +75,51 @@ subgraph KeyKeep
     MobileApp
   end
   subgraph Backend
-    UserManagementService
-    GroupManagementService
-    TeamManagementService
-    PasswordManagementService
-    PasswordSharingService
-    PasswordGenerationService
-    CryptographyService
-    SmtpPopDomainService
-    TwoFactorAuthService
-    PasswordRenewalService
-    PasswordHistoryService
+    subgraph LoadBalancer
+      LoadBalancer
+      UserManagementService
+      GroupManagementService
+      TeamManagementService
+      PasswordManagementService
+      PasswordSharingService
+      PasswordGenerationService
+      CryptographyService
+      SmtpPopDomainService
+      TwoFactorAuthService
+      PasswordRenewalService
+      PasswordHistoryService
+    end
+    LoadBalancer --> APGateway
+    RabbitMQ
   end
 end
 
-WebInterface --> UserManagementService
-WebInterface --> GroupManagementService
-WebInterface --> TeamManagementService
-WebInterface --> PasswordManagementService
-WebInterface --> PasswordSharingService
-WebInterface --> PasswordGenerationService
-WebInterface --> CryptographyService
-WebInterface --> SmtpPopDomainService
-WebInterface --> TwoFactorAuthService
-WebInterface --> PasswordRenewalService
-WebInterface --> PasswordHistoryService
+WebInterface --> APGateway
+DesktopApplication --> APGateway
+BrowserExtension --> APGateway
+MobileApp --> APGateway
 
-DesktopApplication --> UserManagementService
-DesktopApplication --> GroupManagementService
-DesktopApplication --> TeamManagementService
-DesktopApplication --> PasswordManagementService
-DesktopApplication --> PasswordSharingService
-DesktopApplication --> PasswordGenerationService
-DesktopApplication --> CryptographyService
-DesktopApplication --> SmtpPopDomainService
-DesktopApplication --> TwoFactorAuthService
-DesktopApplication --> PasswordRenewalService
-DesktopApplication --> PasswordHistoryService
+APGateway --> LoadBalancer
+LoadBalancer --> UserManagementService
+LoadBalancer --> GroupManagementService
+LoadBalancer --> TeamManagementService
+LoadBalancer --> PasswordManagementService
+LoadBalancer --> PasswordSharingService
+LoadBalancer --> PasswordGenerationService
+LoadBalancer --> CryptographyService
+LoadBalancer --> SmtpPopDomainService
+LoadBalancer --> TwoFactorAuthService
+LoadBalancer --> PasswordRenewalService
+LoadBalancer --> PasswordHistoryService
 
-BrowserExtension --> UserManagementService
-BrowserExtension --> GroupManagementService
-BrowserExtension --> TeamManagementService
-BrowserExtension --> PasswordManagementService
-BrowserExtension --> PasswordSharingService
-BrowserExtension --> PasswordGenerationService
-BrowserExtension --> CryptographyService
-BrowserExtension --> SmtpPopDomainService
-BrowserExtension --> TwoFactorAuthService
-BrowserExtension --> PasswordRenewalService
-BrowserExtension --> PasswordHistoryService
+LoadBalancer --> RabbitMQ
 
-MobileApp --> UserManagementService
-MobileApp --> GroupManagementService
-MobileApp --> TeamManagementService
-MobileApp --> PasswordManagementService
-MobileApp --> PasswordSharingService
-MobileApp --> PasswordGenerationService
-MobileApp --> CryptographyService
-MobileApp --> SmtpPopDomainService
-MobileApp --> TwoFactorAuthService
-MobileApp --> PasswordRenewalService
-MobileApp --> PasswordHistoryService
+RabbitMQ --> PasswordManagementService
+RabbitMQ --> PasswordSharingService
+RabbitMQ --> PasswordGenerationService
+RabbitMQ --> CryptographyService
+RabbitMQ --> SmtpPopDomainService
+RabbitMQ --> PasswordRenewalService
+RabbitMQ --> PasswordHistoryService
+
 ```
