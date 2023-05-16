@@ -19,6 +19,7 @@ The main services of the application are:
 
 ## Technologies
 - C# .NET 6 (8 future releases) (services)
+- ocelot (api gateway)
 - MySQL/MariaDB (database)
 - Angular LTS (web interface, desktop application)
 - Kotlin (mobile app)
